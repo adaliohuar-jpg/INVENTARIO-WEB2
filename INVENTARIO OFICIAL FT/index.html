@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Inventario | U.E. Franz Tamayo II</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header class="encabezado">
+		<div class="marca"><img src="logo oficial.png" alt="Logo de la Unidad Educativa Franz Tamayo II"><div><p class="institucion">Unidad Educativa Franz Tamayo II</p><h1>Sistema de gestión y control de inventario</h1></div></div>
+		<nav aria-label="Navegación principal">
+			<a href="#inicio">Inicio</a><a href="#inventario">Inventario</a><a href="#registrar">Registrar bien</a><a href="#movimientos">Movimientos</a>
+		</nav>
+	</header>
+	<main>
+		<section id="inicio" class="seccion inicio" aria-labelledby="titulo-inicio">
+			<p class="etiqueta">Panel principal</p><h2 id="titulo-inicio">Control de bienes escolares</h2>
+			<p>Organiza, consulta y actualiza los recursos de la institución, registrando su ubicación, responsable y estado.</p>
+			<div class="resumen" aria-label="Resumen del inventario">
+				<article class="tarjeta"><span>Total de bienes</span><strong id="total-bienes">0</strong></article>
+				<article class="tarjeta"><span>Bienes disponibles</span><strong id="bienes-disponibles">0</strong></article>
+				<article class="tarjeta"><span>Bienes asignados</span><strong id="bienes-asignados">0</strong></article>
+				<article class="tarjeta"><span>En mantenimiento</span><strong id="bienes-mantenimiento">0</strong></article>
+				<article class="tarjeta"><span>Bienes dañados</span><strong id="bienes-danados">0</strong></article>
+			</div>
+			<div class="paneles-inicio"><div><h3>Alertas automáticas</h3><ul id="lista-alertas"><li>Sin alertas</li></ul></div><div><h3>Distribución por categoría</h3><div id="distribucion-categorias"></div></div></div>
+		</section>
+		<section id="inventario" class="seccion" aria-labelledby="titulo-inventario">
+			<div class="encabezado-inventario"><div><p class="etiqueta">Consulta</p><h2 id="titulo-inventario">Inventario de bienes</h2></div><button type="button" id="imprimir-inventario">Imprimir inventario</button></div>
+			<div class="filtros">
+				<label>Buscar bien<input id="buscar-bien" type="search" placeholder="Código o nombre"></label>
+				<label>Categoría<select id="filtro-categoria"><option value="">Todas</option><option>Informática</option><option>Mobiliario</option><option>Deportivo</option><option>Didáctico</option><option>Administrativo</option><option>Otros</option></select></label>
+				<label>Estado<select id="filtro-estado"><option value="">Todos</option><option>Bueno</option><option>Regular</option><option>En mantenimiento</option><option>Dañado</option></select></label>
+				<label>Situación<select id="filtro-situacion"><option value="">Todas</option><option>Disponible</option><option>Asignado</option></select></label>
+			</div>
+			<div class="tabla-contenedor"><table id="tabla-inventario"><thead><tr><th>Código</th><th>Nombre</th><th>Categoría</th><th>Modelo</th><th>Cantidad</th><th>Ubicación</th><th>Curso o área</th><th>Responsable</th><th>Estado</th><th>Situación</th><th>Adquisición</th><th>Acciones</th></tr></thead><tbody id="lista-bienes">
+				<tr><td colspan="12">Cargando inventario...</td></tr>
+			</tbody></table></div>
+		</section>
+		<section id="registrar" class="seccion" aria-labelledby="titulo-registrar"><p class="etiqueta">Nuevo registro</p><h2 id="titulo-registrar">Registrar bien</h2>
+			<form id="formulario-bien"><div class="formulario-grid">
+				<label>Código<input name="codigo" id="codigo" required></label><label>Nombre del bien<input name="nombre" id="nombre" required></label>
+				<label>Categoría<select name="categoria" id="categoria" required><option value="">Seleccionar</option><option>Informática</option><option>Mobiliario</option><option>Deportivo</option><option>Didáctico</option><option>Administrativo</option><option>Otros</option></select></label>
+				<label>Modelo<input name="modelo" id="modelo"></label><label>Cantidad<input name="cantidad" id="cantidad" type="number" min="1" required></label><label>Ubicación<input name="ubicacion" id="ubicacion" required></label>
+				<label>Curso o área<input name="area" id="area"></label><label>Responsable<input name="responsable" id="responsable"></label>
+				<label>Estado<select name="estado" id="estado" required><option>Bueno</option><option>Regular</option><option>En mantenimiento</option><option>Dañado</option></select></label>
+				<label>Situación<select name="situacion" id="situacion" required><option>Disponible</option><option>Asignado</option></select></label><label>Fecha de adquisición<input name="fecha" id="fecha" type="date"></label>
+				<label class="campo-ancho">Observaciones<textarea name="observaciones" id="observaciones" rows="3"></textarea></label>
+			</div><div class="acciones-form"><button type="submit">Guardar bien</button><button type="reset">Limpiar</button></div></form>
+		</section>
+		<section id="movimientos" class="seccion" aria-labelledby="titulo-movimientos"><p class="etiqueta">Seguimiento</p><h2 id="titulo-movimientos">Movimientos</h2>
+			<form id="formulario-movimiento"><div class="formulario-grid"><label>Fecha<input name="fecha-movimiento" id="fecha-movimiento" type="date" required></label><label>Código del bien<input name="codigo-movimiento" id="codigo-movimiento" required></label><label>Nombre del bien<input name="nombre-movimiento" id="nombre-movimiento" readonly required></label><label>Cantidad<input name="cantidad-movimiento" id="cantidad-movimiento" type="number" min="1" required></label>
+				<label>Tipo de movimiento<select name="tipo-movimiento" id="tipo-movimiento" required><option value="">Seleccionar</option><option>Entrada</option><option>Salida</option><option>Traslado</option><option>Asignación</option><option>Devolución</option><option>Mantenimiento</option></select></label>
+				<label>Ubicación de origen<input name="origen" id="origen"></label><label>Ubicación de destino<input name="destino" id="destino"></label><label>Responsable<input name="responsable-movimiento" id="responsable-movimiento"></label><label>Observación<textarea name="observacion-movimiento" id="observacion-movimiento" rows="2"></textarea></label>
+			</div><button type="submit">Registrar movimiento</button></form>
+			<div class="tabla-contenedor"><table id="tabla-movimientos"><thead><tr><th>Fecha</th><th>Código</th><th>Nombre</th><th>Tipo</th><th>Cantidad</th><th>Origen</th><th>Destino</th><th>Responsable</th><th>Observación</th></tr></thead><tbody id="lista-movimientos"></tbody></table></div>
+		</section>
+	</main>
+	<footer><p>Unidad Educativa Franz Tamayo II | Gestión interna de inventario</p></footer>
+	<script src="script.js"></script>
+</body>
+</html>
